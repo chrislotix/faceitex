@@ -4,7 +4,7 @@
 //
 // extractedText.match((/[\d]*[\.]{0,1}[\d]+/g));
 //
-// TODO: player objects, storage
+// TODO: player objects, storage, copy to clipboard
 //
 
 var statsSpan = document.getElementsByClassName('tooltip button is-white is-small');
@@ -29,9 +29,13 @@ for(var i = 0; i < statsArray.length; i++) {
   deaths  += parseInt(statsArray[i][2]);
 }
 
-alert(
-  "K:" + kills + "\n" +
-  "A:" + assists + "\n" +
-  "D:" + deaths + "\n" +
-  "K/D:" + (kills/deaths).toFixed(2)
-  );
+var kd = (kills/deaths).toFixed(2);
+var message = "K: " + kills + " " +
+              "A: " + assists + " " +
+              "D: " + deaths + " " +
+              "K/D: " +  kd;
+
+// document.execCommand('copy');
+// "searchText"
+// var input = document.getElementsByName("searchText");
+alert(message);
