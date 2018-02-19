@@ -4,7 +4,11 @@
 //
 // extractedText.match((/[\d]*[\.]{0,1}[\d]+/g));
 //
-// TODO: player objects, storage, copy to clipboard
+// TODO:
+// [x] player objects
+// [x] clean up the code
+// [ ] storage
+// [ ] copy to clipboard
 //
 
 var statsSpan = document.getElementsByClassName('tooltip button is-white is-small');
@@ -15,27 +19,43 @@ var assists = 0;
 var deaths  = 0;
 
 
-for(var item of statsSpan) {
-  extractedText.push(item.textContent.replace(/\s/g, ''));
+function extractTextFromSpan() {
+  for(var item of statsSpan) {
+    extractedText.push(item.textContent.replace(/\s/g, ''));
+  }
 }
 
-for(var element of extractedText) {
-  statsArray.push(element.match(/[\d]*[\.]{0,1}[\d]+/g));
+
+function getStatsFromExtractedText() {
+  for(var element of extractedText) {
+    statsArray.push(element.match(/[\d]*[\.]{0,1}[\d]+/g));
+  }
 }
 
-for(var i = 0; i < statsArray.length; i++) {
-  kills   += parseInt(statsArray[i][0]);
-  assists += parseInt(statsArray[i][1]);
-  deaths  += parseInt(statsArray[i][2]);
+
+function getAllStats() {
+  for(var i = 0; i < statsArray.length; i++) {
+    kills   += parseInt(statsArray[i][0]);
+    assists += parseInt(statsArray[i][1]);
+    deaths  += parseInt(statsArray[i][2]);
+  }
 }
 
-var kd = (kills/deaths).toFixed(2);
+function getKillDeathRatio() {
+  return (kills/deaths).toFixed(2);
+}
+
+extractTextFromSpan();
+getStatsFromExtractedText();
+getAllStats();
+
 var message = "K: " + kills + " " +
               "A: " + assists + " " +
               "D: " + deaths + " " +
-              "K/D: " +  kd;
+              "K/D: " +  getKillDeathRatio();
 
 // document.execCommand('copy');
 // "searchText"
 // var input = document.getElementsByName("searchText");
 alert(message);
+
